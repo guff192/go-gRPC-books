@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package books;
+
+option go_package = "pkg/pb";
+
+message Author {
+  int64 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+}
+
+message Book {
+  int64 id = 1;
+  string title = 2;
+  string summary = 3;
+}
+
+message BookAuthorsRequest {
+  Book book = 1;
+}
+
+message BookAuthorsResponse {
+  repeated Author authors = 1;
+}
+
+message AuthorBooksRequest {
+  Author author = 1;
+}
+
+message AuthorBooksRespponse {
+  repeated Book books = 1;
+}
+
+service BookService {
+  rpc GetBookAuthors(BookAuthorsRequest) returns (BookAuthorsResponse) {}
+  rpc GetAuthorBooks(AuthorBooksRequest) returns (AuthorBooksRespponse) {}
+}
+
