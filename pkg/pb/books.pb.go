@@ -25,9 +25,9 @@ type Author struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	FirstName string `protobuf:"bytes,2,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
-	LastName  string `protobuf:"bytes,3,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty" db:"id"`
+	FirstName string `protobuf:"bytes,2,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty" db:"first_name"`
+	LastName  string `protobuf:"bytes,3,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty" db:"last_name"`
 }
 
 func (x *Author) Reset() {
