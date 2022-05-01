@@ -13,6 +13,7 @@ func NewAuthorService(repo repository.Author) *AuthorService {
 	return &AuthorService{repo: repo}
 }
 
-func (s *AuthorService) GetBooks(author *pb.Author) ([]*pb.Book, error) {
-	return s.repo.GetBooks(author.Id)
+// Service method for getting books by author
+func (s *AuthorService) GetBooks(first_name, last_name string) ([]*pb.Book, error) {
+	return s.repo.GetBooks(first_name, last_name)
 }

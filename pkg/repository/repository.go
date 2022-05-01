@@ -5,12 +5,14 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+// Repository for querying books
 type Book interface {
-	GetAuthors(bookId int64) ([]*pb.Author, error)
+	GetAuthors(book_title string) ([]*pb.Author, error)
 }
 
+// Repository for querying authors
 type Author interface {
-	GetBooks(authorId int64) ([]*pb.Book, error)
+	GetBooks(first_name, last_name string) ([]*pb.Book, error)
 }
 
 type Repository struct {

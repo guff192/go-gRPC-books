@@ -5,12 +5,14 @@ import (
 	"github.com/guff192/go-gRPC-books/pkg/repository"
 )
 
+// Service for working with books
 type Book interface {
-	GetAuthors(book *pb.Book) ([]*pb.Author, error)
+	GetAuthors(book_title string) ([]*pb.Author, error)
 }
 
+// Service for working with authors
 type Author interface {
-	GetBooks(author *pb.Author) ([]*pb.Book, error)
+	GetBooks(first_name, last_name string) ([]*pb.Book, error)
 }
 
 type Service struct {

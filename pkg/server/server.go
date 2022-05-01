@@ -17,8 +17,9 @@ type server struct {
 	service *service.Service
 }
 
-func (s *server) GetBookAuthors(ctx context.Context, bookRequest *pb.BookAuthorsRequest) (*pb.BookAuthorsResponse, error) {
-	authors, err := s.service.GetAuthors(bookRequest.Book)
+// Gets book instance as a request and returning list of its authors
+func (s *server) GetBookAuthors(ctx context.Context, baRequest *pb.BookAuthorsRequest) (*pb.BookAuthorsResponse, error) {
+	authors, err := s.service.GetAuthors(baRequest.BookTitle)
 	if err != nil {
 		return nil, err
 	}
@@ -26,8 +27,9 @@ func (s *server) GetBookAuthors(ctx context.Context, bookRequest *pb.BookAuthors
 	return &pb.BookAuthorsResponse{Authors: authors}, nil
 }
 
-func (s *server) GetAuthorBooks(ctx context.Context, authorRequest *pb.AuthorBooksRequest) (*pb.AuthorBooksRespponse, error) {
-	books, err := s.service.GetBooks(authorRequest.Author)
+// Gets author instance as a request and returning list of his books
+func (s *server) GetAuthorBooks(ctx context.Context, abRequest *pb.AuthorBooksRequest) (*pb.AuthorBooksRespponse, error) {
+	books, err := s.service.GetBooks(abRequest.FirstName, abRequest.LastName)
 	if err != nil {
 		return nil, err
 	}
@@ -40,6 +42,7 @@ type Config struct {
 	Port string
 }
 
+// Runs server on tcp host:port, given by config
 func RunServer(cfg Config, service *service.Service) error {
 	lis, err := net.Listen("tcp", fmt.Sprintf("%s:%s", cfg.Host, cfg.Port))
 	if err != nil {

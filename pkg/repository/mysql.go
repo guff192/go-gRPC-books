@@ -7,6 +7,7 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
+// Table names
 const (
 	booksTable        = "books"
 	authorsTable      = "authors"
@@ -21,6 +22,7 @@ type Config struct {
 	DBName   string
 }
 
+// Initializes DB with given config
 func NewMysqlDB(cfg Config) (*sqlx.DB, error) {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", cfg.Username, cfg.Password, cfg.Host, cfg.Port, cfg.DBName)
 	db, err := sqlx.Open("mysql", dsn)
@@ -28,6 +30,7 @@ func NewMysqlDB(cfg Config) (*sqlx.DB, error) {
 		return nil, err
 	}
 
+	// Trying to ping DB when connected
 	err = db.Ping()
 	if err != nil {
 		return nil, err
