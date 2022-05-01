@@ -15,7 +15,7 @@ func NewAuthorMysql(db *sqlx.DB) *AuthorMysql {
 	return &AuthorMysql{db: db}
 }
 
-// Repository method for querying books by author id
+// Repository method for querying books by author's first and last name
 func (r *AuthorMysql) GetBooks(first_name, last_name string) ([]*pb.Book, error) {
 	var books []*pb.Book
 

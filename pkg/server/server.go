@@ -17,7 +17,7 @@ type server struct {
 	service *service.Service
 }
 
-// Gets book instance as a request and returning list of its authors
+// Gets book title as a request and returning list of its authors
 func (s *server) GetBookAuthors(ctx context.Context, baRequest *pb.BookAuthorsRequest) (*pb.BookAuthorsResponse, error) {
 	authors, err := s.service.GetAuthors(baRequest.BookTitle)
 	if err != nil {
@@ -27,7 +27,7 @@ func (s *server) GetBookAuthors(ctx context.Context, baRequest *pb.BookAuthorsRe
 	return &pb.BookAuthorsResponse{Authors: authors}, nil
 }
 
-// Gets author instance as a request and returning list of his books
+// Gets author's first and last name as a request and returning list of his books
 func (s *server) GetAuthorBooks(ctx context.Context, abRequest *pb.AuthorBooksRequest) (*pb.AuthorBooksRespponse, error) {
 	books, err := s.service.GetBooks(abRequest.FirstName, abRequest.LastName)
 	if err != nil {
